@@ -1,0 +1,4 @@
+Main-Class: com.jarcontainer.coinfactory.eth.EthWallet
+Implementation-Title: BTC
+Implementation-Version: btc0.15.1
+Implementation-Vendor: 58COIN Inc.
