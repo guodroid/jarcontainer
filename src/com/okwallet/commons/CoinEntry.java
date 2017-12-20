@@ -1,4 +1,6 @@
-package com.jarcontainer.coinfactory;
+package com.okwallet.commons;
+
+import com.okwallet.framework.WalletController;
 
 public class CoinEntry {
 
@@ -7,9 +9,9 @@ public class CoinEntry {
     public String tickerFromMethodCall = "";
     public String walletVersion = "";
 
-    public CoinServiceInterface coinServiceInterface;
+    public WalletController coinServiceInterface;
 
-    public CoinEntry(String fileName, CoinServiceInterface coinServiceInterface) {
+    public CoinEntry(String fileName, WalletController coinServiceInterface) {
         this.fileName = fileName;
         this.walletVersion = coinServiceInterface.getVersion();
         this.walletDefaultParameterFromManifest = "Unfinished...";

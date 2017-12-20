@@ -1,9 +1,11 @@
-package com.jarcontainer.coinfactory.btc;
+package com.okwallet.extention.btc;
 
-import com.jarcontainer.coinfactory.CoinBank;
-import com.jarcontainer.coinfactory.CoinServiceInterface;
+import com.okwallet.commons.CoinBank;
+import com.okwallet.framework.BaseWalletController;
+import com.okwallet.framework.ServiceStatus;
+import com.okwallet.framework.WalletController;
 
-public class BtcWallet implements CoinServiceInterface {
+public class BtcWallet extends BaseWalletController {
 
     private static BtcWallet instance = new BtcWallet();
 

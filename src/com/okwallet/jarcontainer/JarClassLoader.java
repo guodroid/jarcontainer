@@ -1,4 +1,4 @@
-package com.jarcontainer;
+package com.okwallet.jarcontainer;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,15 +12,18 @@ import java.net.URLClassLoader;
 import java.util.jar.Attributes;
 
 class JarClassLoader extends URLClassLoader {
-    private String url;
 
-    public JarClassLoader(String url) throws MalformedURLException {
-        super(new URL[]{new File(url).toURL()}, JarClassLoader.class.getClassLoader());
-        this.url = url;
+    //Copy from Java tutorial. https://docs.oracle.com/javase/tutorial/deployment/jar/jarclassloader.html
+    private String fullFilePath;
+
+    public JarClassLoader(String fullFilePath) throws MalformedURLException {
+        //TODO: should url, but I confused by url, so change to fullFilePath
+        super(new URL[]{new File(fullFilePath).toURL()}, JarClassLoader.class.getClassLoader());
+        this.fullFilePath = fullFilePath;
     }
 
     public String getMainClassName() throws IOException {
-        URL u = new URL("jar", "", "file://"+ url + "!/");
+        URL u = new URL("jar", "", "file://" + fullFilePath + "!/");
         JarURLConnection uc = (JarURLConnection) u.openConnection();
         Attributes attr = uc.getMainAttributes();
         return attr != null ? attr.getValue(Attributes.Name.MAIN_CLASS) : null;
@@ -28,7 +31,7 @@ class JarClassLoader extends URLClassLoader {
 
     public void invokeClass(String name, String[] args) throws ClassNotFoundException,
             NoSuchMethodException, InvocationTargetException {
-        Class c = Class.forName (name, true, this);
+        Class c = Class.forName(name, true, this);
         Method m = c.getMethod("main", new Class[]{args.getClass()});
         m.setAccessible(true);
         int mods = m.getModifiers();

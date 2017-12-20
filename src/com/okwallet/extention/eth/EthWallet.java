@@ -1,9 +1,10 @@
-package com.jarcontainer.coinfactory.eth;
+package com.okwallet.extention.eth;
 
-import com.jarcontainer.coinfactory.CoinBank;
-import com.jarcontainer.coinfactory.CoinServiceInterface;
+import com.okwallet.commons.CoinBank;
+import com.okwallet.framework.BaseWalletController;
+import com.okwallet.framework.WalletController;
 
-public class EthWallet implements CoinServiceInterface {
+public class EthWallet extends BaseWalletController {
 
     private static EthWallet instance = new EthWallet();
 

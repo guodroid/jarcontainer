@@ -1,6 +1,7 @@
-package com.jarcontainer.coinfactory;
+package com.okwallet.commons;
 
-import com.jarcontainer.Main;
+import com.okwallet.framework.WalletController;
+import com.okwallet.Main;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class CoinBank {
 
     private Map<String, CoinEntry> allCoins = Collections.synchronizedMap(new HashMap());
 
-    public void registerCoin(String fileName, CoinServiceInterface coinServiceInterface) {
+    public void registerCoin(String fileName, WalletController coinServiceInterface) {
         CoinEntry coinEntry = new CoinEntry(fileName, coinServiceInterface);
         coinEntry.tickerFromMethodCall = coinServiceInterface.getTicker();
         allCoins.put(fileName, coinEntry);

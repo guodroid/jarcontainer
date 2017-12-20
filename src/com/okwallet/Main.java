@@ -1,6 +1,7 @@
-package com.jarcontainer;
+package com.okwallet;
 
-import com.jarcontainer.coinfactory.CoinBank;
+import com.okwallet.commons.CoinBank;
+import com.okwallet.jarcontainer.JarHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,6 @@ public class Main {
         WatchService watcher = FileSystems.getDefault().newWatchService();
 
         Path dir = new File(CoinBank.COINS_PATH).toPath();
-        ;
         try {
             WatchKey key = dir.register(watcher,
                     StandardWatchEventKinds.ENTRY_CREATE,
@@ -33,6 +33,7 @@ public class Main {
 
     private static void waitExitCommand() {
         System.out.println("Press X for exit.....");
+        System.out.println("Press P to check your okwallet bank.....");
         Scanner s = new Scanner(System.in);
         while (true) {
             String input = s.nextLine();
@@ -45,15 +46,11 @@ public class Main {
         }
     }
 
-
     public static void setupWatcherFromThread(final WatchService watcher) {
-        new Thread() {
-            @Override
-            public void run() {
-                setupWatcher(watcher);
-            }
-        }.start();
-
+        //First time write lambda.
+        new Thread(() -> {
+            setupWatcher(watcher);
+        }).start();
     }
 
     public static void log(String s) {
@@ -61,6 +58,7 @@ public class Main {
     }
 
 
+    //Copy from https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java
     public static void setupWatcher(WatchService watcher) {
         for (; ; ) {
 
@@ -100,8 +98,6 @@ public class Main {
                 } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
                     JarHelper.loadCoinFromJar(filename);
                 }
-
-
             }
 
             // Reset the key -- this step is critical if you want to

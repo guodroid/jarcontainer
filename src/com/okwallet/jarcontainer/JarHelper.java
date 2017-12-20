@@ -1,6 +1,7 @@
-package com.jarcontainer;
+package com.okwallet.jarcontainer;
 
-import com.jarcontainer.coinfactory.CoinBank;
+import com.okwallet.Main;
+import com.okwallet.commons.CoinBank;
 
 import java.io.File;
 
